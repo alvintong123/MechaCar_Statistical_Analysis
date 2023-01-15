@@ -1,0 +1,13 @@
+mecha_reg<-lm(mpg ~ vehicle_length + vehicle_weight + spoiler_angle + ground_clearance + AWD, MechaCar_mpg)
+summary(mecha_reg)
+mean<-mean(Suspension_Coil$PSI)
+med<-median(Suspension_Coil$PSI)
+vary<-var(Suspension_Coil$PSI) 
+std<-sd(Suspension_Coil$PSI) 
+total_summary <- data.frame(mean,med,vary,std)
+lot_summary <- Suspension_Coil %>% group_by(Manufacturing_Lot) %>% summarise(mean(PSI),median(PSI),var(PSI),sd(PSI))
+ttest<-t.test(Suspension_Coil$PSI, y = NULL, alternative = c("two.sided", "less", "greater"), mu=1500, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+ttest_1<-t.test(subset(Suspension_Coil,Manufacturing_Lot=="Lot1")$PSI, y = NULL, alternative = c("two.sided", "less", "greater"), mu=1500, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+ttest_2<-t.test(subset(Suspension_Coil,Manufacturing_Lot=="Lot2")$PSI, y = NULL, alternative = c("two.sided", "less", "greater"), mu=1500, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+ttest_3<-t.test(subset(Suspension_Coil,Manufacturing_Lot=="Lot3")$PSI, y = NULL, alternative = c("two.sided", "less", "greater"), mu=1500, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+
